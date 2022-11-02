@@ -39,44 +39,36 @@ export default function Form() {
   return (
     <>
       <br />
-      <br />
-
-      <div className="flex flex-row space-x-8">
+      <div className="flex flex-row justify-center flex-grow: 1">
         {/* Add connected wallet address */}
-        <div className="flex flex-col space around basis=1/4">
-          <form className="form-control" onSubmit={handleSubmit}>
-            <div>
-              <input
-                type="Domain Name"
-                placeholder="Domain Name"
-                onChange={handleDomainNameChange}
-                className="input input-bordered w-full max-w-xlg"
-              />
-            </div>
-            <br />
-            <div className="">
-              <input
-                type="Contract Address"
-                placeholder="Contract Address to Verify"
-                onChange={handleContractAddressChange}
-                className="input input-bordered w-full max-w-xs"
-              />
-            </div>
-            <br />
-            <button
-              className="btn btn-primary"
-              disabled={
-                domainName.length === 0 ||
-                contractAddress.length === 0 ||
-                !account.isConnected ||
-                status === "submitting"
-              }
-            >
-              Start Verification
-            </button>
-            {error !== null && <p className="Error">{error.message}</p>}
-          </form>
-        </div>
+        <form className="form-control" onSubmit={handleSubmit}>
+          <input
+            type="Domain Name"
+            placeholder="Domain Name"
+            onChange={handleDomainNameChange}
+            className="input input-bordered input-group-lg"
+          />
+          <br />
+          <input
+            type="Contract Address"
+            placeholder="Contract Address to Verify"
+            onChange={handleContractAddressChange}
+            className="input input-bordered input-group-lg"
+          />
+          <br />
+          <button
+            className="btn btn-primary"
+            disabled={
+              domainName.length === 0 ||
+              contractAddress.length === 0 ||
+              !account.isConnected ||
+              status === "submitting"
+            }
+          >
+            Start Verification
+          </button>
+          {error !== null && <p className="Error">{error.message}</p>}
+        </form>
         {nextStep === true && (
           <div className="flex flex-col flex-auto w-64 pl-8">
             <text>{foundOnsite}</text>

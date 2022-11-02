@@ -74,6 +74,7 @@ function App() {
                 <Web3 />
               </span>
             </div>
+            {/* Conditionally render between registration and  */}
             <p className="py-2 text-xl">
               <span className="font-bold">CertDAO</span> is a decentralized
               organization that verifies domain to contract address mappings for
