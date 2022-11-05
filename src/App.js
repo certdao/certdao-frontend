@@ -1,25 +1,52 @@
-import { useAccount, Web3Modal } from '@web3modal/react';
+import { providers } from '@web3modal/ethereum';
+import { Web3Modal } from '@web3modal/react';
 import React from 'react';
 
 import Form from './components/Form';
+import RegistrationTable from './components/Registrations';
 import Web3 from './components/Web3';
+import { WEB3_MODAL_ID } from './constants';
 
 // TODO: Get lock icon: https://icons8.com/icons/set/lock (black, minimal)
 
 // Web3 config
+// Change provider to own
 const config = {
-  projectId: "fd5f51a14ca7c18d31ecac056a36db16",
+  projectId: WEB3_MODAL_ID,
   theme: "light",
   accentColor: "default",
   ethereum: {
-    appName: "cerDAO-front",
+    appName: "certDAO-frontend",
+    chains: [
+      {
+        id: 31337,
+        name: "Hardhat 31337",
+        network: "localhost",
+        rpcUrls: { default: "http://127.0.0.1:8545" },
+      },
+    ],
+    providers: [
+      providers.jsonRpcProvider({
+        rpc: (chain) => ({ http: "http://127.0.0.1:8545" }),
+      }),
+    ],
   },
 };
 
 function App() {
-  const UserContext = React.createContext(null);
-  const [user, setUser] = React.useState(null);
-  const { account, isReady } = useAccount();
+  const [registration, clickedOnRegistration] = React.useState(false);
+
+  async function handleRegistrationClick(e) {
+    e.preventDefault();
+    console.log("clicked handle registration");
+    clickedOnRegistration(true);
+  }
+
+  async function handleHomeClick(e) {
+    e.preventDefault();
+    console.log("clicked home registration");
+    clickedOnRegistration(false);
+  }
 
   return (
     <>
@@ -30,7 +57,7 @@ function App() {
             <div className="sticky top-0 p-4 bg-gray-100 rounded-xl w-full">
               <ul className="flex sm:flex-col overflow-hidden content-center justify-between">
                 <li className="py-2 hover:bg-indigo-300 rounded">
-                  <a className="truncate" href="#">
+                  <a className="truncate" href="#" onClick={handleHomeClick}>
                     <img
                       src="//cdn.jsdelivr.net/npm/heroicons@1.0.1/outline/home.svg"
                       className="w-7 sm:mx-2 mx-4 inline"
@@ -39,7 +66,11 @@ function App() {
                   </a>
                 </li>
                 <li className="py-2 hover:bg-indigo-300 rounded">
-                  <a className="truncate" href="#">
+                  <a
+                    className="truncate"
+                    href="#"
+                    onClick={handleRegistrationClick}
+                  >
                     <img
                       src="//cdn.jsdelivr.net/npm/heroicons@1.0.1/outline/cog.svg"
                       className="w-7 sm:mx-2 mx-4 inline"
@@ -59,6 +90,7 @@ function App() {
               </div>
             </div>
           </div>
+
           <main
             role="main"
             className="w-full h-full flex-grow p-3 overflow-auto"
@@ -74,42 +106,51 @@ function App() {
                 <Web3 />
               </span>
             </div>
-            {/* Conditionally render between registration and  */}
-            <p className="py-2 text-xl">
-              <span className="font-bold">CertDAO</span> is a decentralized
-              organization that verifies domain to contract address mappings for
-              the Ethereum community. Think of CertDAO as like the "HTTPS" of
-              Web3.
-              <br />
-              <br />
-              Contract owners use <span className="font-bold">CertDAO</span> to
-              verify the contract addresses and the domains their users will
-              interact with the contract addresses on.
-              <br />
-              <br />
-              Then, anyone, contract, code, wallet or interface can leverage the
-              <span className="font-bold"> CertDAO</span> registry to verify
-              that the contract address is the authorized one for the domain.
-              <br />
-              <br />
-              The hope is that one day, all primary interfaces for smart
-              contracts (wallets) will use
-              <span className="font-bold"> CertDAO</span>. Scaling the next
-              millions of users' trust in the Ethereum space. For more details
-              on how <span className="font-bold">CertDAO</span> works, check out
-              this
-              <a class="link link-secondary" href="#">
-                {" "}
-                link.
-              </a>
-              <br />
-              <br />
-              To begin the verification process as a contract owner, connect the
-              wallet that owns the contract address you want to verify. Then
-              enter the domain that users will interact with the contract with
-              and the contract address itself.
-            </p>
-            <Form />
+            {registration === true ? (
+              <RegistrationTable />
+            ) : (
+              <>
+                <p className="py-2 text-xl">
+                  <span className="font-bold">CertDAO</span> is a decentralized
+                  organization that verifies domain to contract address mappings
+                  for the Ethereum community. Think of CertDAO as like the
+                  "HTTPS" of Web3.
+                  <br />
+                  <br />
+                  Contract owners use <span className="font-bold">
+                    CertDAO
+                  </span>{" "}
+                  to verify the contract addresses and the domains their users
+                  will interact with the contract addresses on.
+                  <br />
+                  <br />
+                  Then, anyone, contract, code, wallet or interface can leverage
+                  the
+                  <span className="font-bold"> CertDAO</span> registry to verify
+                  that the contract address is the authorized one for the
+                  domain.
+                  <br />
+                  <br />
+                  The hope is that one day, all primary interfaces for smart
+                  contracts (wallets) will use
+                  <span className="font-bold"> CertDAO</span>. Scaling the next
+                  millions of users' trust in the Ethereum space. For more
+                  details on how <span className="font-bold">CertDAO</span>{" "}
+                  works, check out this
+                  <a className="link link-secondary" href="#">
+                    {" "}
+                    link.
+                  </a>
+                  <br />
+                  <br />
+                  To begin the verification process as a contract owner, connect
+                  the wallet that owns the contract address you want to verify.
+                  Then enter the domain that users will interact with the
+                  contract with and the contract address itself.
+                </p>
+                <Form />
+              </>
+            )}
           </main>
         </div>
         <footer className="bg-indigo-800 mt-auto">

@@ -1,8 +1,6 @@
+import { CONTRACT_CHECKER_URL } from '../constants.js';
+
 // Simple eth address and domainName verification
-
-// TODO: use dotenv config and process.env to set url
-const CONTRACT_CHECKER_URL = "http://localhost:4300/validateContract";
-
 const domainRegex = new RegExp(
   "^(((?!-))(xn--)?[a-z0-9-_]{0,61}[a-z0-9]{1,1}.)*(xn--)?([a-z0-9-]{1,61}|[a-z0-9-]{1,30}).[a-z]{2,}$"
 );
