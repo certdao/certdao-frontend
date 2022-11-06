@@ -22,6 +22,7 @@ const config = {
         id: 31337,
         name: "Hardhat 31337",
         network: "localhost",
+        blockExplorerUrls: [],
         rpcUrls: { default: "http://127.0.0.1:8545" },
       },
     ],

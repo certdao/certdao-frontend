@@ -1,7 +1,7 @@
 import { useAccount } from '@web3modal/react';
 import { useState } from 'react';
 
-import { checkContractAddress, validateContractAddress, validateDomainName } from '../helpers/verify';
+import { checkContractAddress, validateContractAddress, validateDomainName } from '../helpers/VerifyAddress';
 import { UseContractWrite } from './SubmitTransaction';
 
 export default function Form() {

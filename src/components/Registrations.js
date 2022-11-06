@@ -4,12 +4,12 @@ import { useEffect } from 'react';
 import React from 'react';
 
 import { CERTDAO_ABI, CERTDAO_ADDRESS } from '../constants';
+import RegistrationTableElement from './RegistrationElement';
 
 export default function RegistrationTable() {
-  const { allRegistrations, setRegistrations } = React.useState(null);
   const { account } = useAccount();
 
-  const config = {
+  const getAllContractConfig = {
     address: CERTDAO_ADDRESS,
     abi: CERTDAO_ABI,
     args: [account.address],
@@ -18,59 +18,62 @@ export default function RegistrationTable() {
     enabled: false,
   };
 
-  const { data, error, isLoading, refetch } = useContractRead(config);
+  const { data, error, isLoading, refetch } =
+    useContractRead(getAllContractConfig);
 
-  // useEffect(() => {
-  //   console.log("certdao address: ", CERTDAO_ADDRESS);
-  //   async function getAllRegistrations() {
-  //     console.log("connected address: ", account.address);
-  //     console.log("fetching");
-  //     await refetch();
-  //     console.log("response", data);
-  //     console.log("error", error);
-  //     // setRegistrations(data);
-  //   }
-  //   getAllRegistrations();
-  // }, []);
+  async function getAllRegistrations() {
+    console.log("address: ", account.address);
+    console.log("Calling getContractAddress");
+    await refetch();
+    console.log("data: ", data);
+    console.log("error: ", error);
+  }
 
-  // return (
-  //   <section>
-  //     {/* {account.address}'s Registrations: */}
-  //     <table className="table w-full">
-  //       <thead>
-  //         <tr>
-  //           <th>Host Name</th>
-  //           <th>Status</th>
-  //           <th>Block time registered</th>
-  //           <th>Description</th>
-  //         </tr>
-  //       </thead>
-  //       <tbody>
-  //         <tr>
-  //           <th>1</th>
-  //           <td>Cy Ganderton</td>
-  //           <td>Quality Control Specialist</td>
-  //           <td>Blue</td>
-  //         </tr>
-  //       </tbody>
-  //       <button onClick={async () => refetch()}>Refetch data</button>
-  //     </table>
-  //   </section>
-  // );
+  useEffect(() => {
+    async function callGetAllRegistrations() {
+      await getAllRegistrations();
+    }
+    callGetAllRegistrations();
+  }, []);
 
   return (
     <section>
-      <h1>useContractRead</h1>
-      <ul>
-        <li>
-          Returned data:{" "}
-          <span>{isLoading ? "Loading..." : JSON.stringify(data)}</span>
-        </li>
-        <li>
-          Error: <span>{error ? error.message : "No Error"}</span>
-        </li>
-      </ul>
-      <button onClick={async () => refetch()}>Refetch data</button>
+      Account: {account.address}
+      <br />
+      <text> Contract Addresses: {data} </text>
+      <br />
+      <text> Error: {error?.message} </text>
+      <table className="table w-full">
+        <thead>
+          <tr>
+            <th>Host Name</th>
+            <th>Status</th>
+            <th>Block time registered</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          {/* {data === undefined ? (
+            <></>
+          ) : (
+            <>
+              <RegistrationTableElement input={data} />{" "}
+            </>
+          )} */}
+          {/* {data === undefined || data === null
+            ? null
+            : data.map((address) => {
+                console.log("address: ", address);
+                return <RegistrationTableElement input={address} />;
+              })} */}
+          <tr>
+            <th>1</th>
+            <td>Cy Ganderton</td>
+            <td>Quality Control Specialist</td>
+            <td>Blue</td>
+          </tr>
+        </tbody>
+      </table>
     </section>
   );
 }
