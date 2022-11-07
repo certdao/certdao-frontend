@@ -1,5 +1,6 @@
 import { providers } from '@web3modal/ethereum';
 import { Web3Modal } from '@web3modal/react';
+import { useAccount } from '@web3modal/react';
 import React from 'react';
 
 import Form from './components/Form';
@@ -19,8 +20,8 @@ const config = {
     appName: "certDAO-frontend",
     chains: [
       {
-        id: 31337,
-        name: "Hardhat 31337",
+        id: 1337,
+        name: "Hardhat 1337",
         network: "localhost",
         blockExplorerUrls: [],
         rpcUrls: { default: "http://127.0.0.1:8545" },
@@ -35,6 +36,7 @@ const config = {
 };
 
 function App() {
+  const { account, isConnected, isReady } = useAccount();
   const [registration, clickedOnRegistration] = React.useState(false);
 
   async function handleRegistrationClick(e) {
@@ -107,8 +109,8 @@ function App() {
                 <Web3 />
               </span>
             </div>
-            {registration === true ? (
-              <RegistrationTable />
+            {registration === true && isReady && isConnected ? (
+              <RegistrationTable {...account} />
             ) : (
               <>
                 <p className="py-2 text-xl">
