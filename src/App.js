@@ -3,19 +3,19 @@ import { Web3Modal } from '@web3modal/react';
 import { useAccount } from '@web3modal/react';
 import React from 'react';
 
-import Form from './components/Form';
 import RegistrationTable from './components/Registrations';
+import Form from './components/SubmitVerificationForm';
 import Web3 from './components/Web3';
 import { WEB3_MODAL_ID } from './constants';
 
-// TODO: Get lock icon: https://icons8.com/icons/set/lock (black, minimal)
 
+// TODO: Get lock icon: https://icons8.com/icons/set/lock (black, minimal)
 // Web3 config
 // Change provider to own
 const config = {
   projectId: WEB3_MODAL_ID,
   theme: "light",
-  accentColor: "default",
+  accentColor: "blue",
   ethereum: {
     appName: "certDAO-frontend",
     chains: [
@@ -41,6 +41,7 @@ function App() {
 
   async function handleRegistrationClick(e) {
     e.preventDefault();
+    console.log(isConnected, isReady);
     console.log("clicked handle registration");
     clickedOnRegistration(true);
   }
@@ -109,7 +110,7 @@ function App() {
                 <Web3 />
               </span>
             </div>
-            {registration === true && isReady && isConnected ? (
+            {registration === true && (isReady || isConnected) ? (
               <RegistrationTable {...account} />
             ) : (
               <>
@@ -161,6 +162,12 @@ function App() {
             <div className="flex">
               <div className="flex-grow flex flex-col"></div>
               <div className="flex-grow flex flex-col">
+                <a
+                  href="https://discourse.certdao.net/"
+                  className="text-xs uppercase tracking-wider"
+                >
+                  Discourse
+                </a>
                 <a href="#" className="text-xs uppercase tracking-wider">
                   Discord
                 </a>

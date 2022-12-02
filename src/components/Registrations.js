@@ -1,12 +1,14 @@
 import { useContractRead } from '@web3modal/react';
 import { useAccount } from '@web3modal/react';
-import { useEffect } from 'react';
-import React from 'react';
+import { useEffect, useState } from "react";
+import React from "react";
 
-import { CERTDAO_ABI, CERTDAO_ADDRESS } from '../constants';
-import RegistrationTableElement from './RegistrationElement';
+import { CERTDAO_ABI, CERTDAO_ADDRESS } from "../constants";
+import RegistrationTableElement from "./RegistrationElement";
 
 export default function RegistrationTable({ address }) {
+  const [siteError, setError] = useState(null);
+
   const getAllContractConfig = {
     address: CERTDAO_ADDRESS,
     abi: CERTDAO_ABI,
@@ -32,7 +34,7 @@ export default function RegistrationTable({ address }) {
     <section>
       Connected wallet address: {address}
       <br />
-      Error: <span>{error ? error.message : "No Error"}</span>
+      {error ? <p color="red">Error: {error.message}</p> : null}
       <table className="table w-full">
         <thead>
           <tr>
