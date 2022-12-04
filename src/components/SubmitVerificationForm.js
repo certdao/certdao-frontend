@@ -1,13 +1,10 @@
-import { useAccount } from "@web3modal/react";
-import { useState, useEffect } from "react";
-import LoadingIcons from "react-loading-icons";
+import { useAccount } from '@web3modal/react';
+import { useEffect, useState } from 'react';
+import LoadingIcons from 'react-loading-icons';
 
-import {
-  checkContractAddress,
-  validateContractAddress,
-  validateDomainName,
-} from "../helpers/VerifyAddress";
-import { UseContractWrite } from "./SubmitVerificationTransaction";
+import { checkContractAddress, validateContractAddress, validateDomainName } from '../helpers/VerifyAddress';
+import { GetVerifiedContract } from './GetVerifiedContract';
+import { SubmitVerificationTransaction } from './SubmitVerificationTransaction';
 
 export default function Form() {
   const [domainName, setDomainName] = useState("");
@@ -59,7 +56,7 @@ export default function Form() {
         <>
           <div className="flex flex-row justify-center flex-grow: 1">
             {/* Add connected wallet address */}
-            <form className="form-control" onSubmit={handleSubmit}>
+            <form className="form-control w-1/2" onSubmit={handleSubmit}>
               <input
                 type="Domain Name"
                 placeholder="Domain Name"
@@ -108,7 +105,9 @@ export default function Form() {
               <b>0.05 ETH</b> fee.
             </p>
             <br />
-            <UseContractWrite
+            <GetVerifiedContract />
+            <br />
+            <SubmitVerificationTransaction
               input={{ domainName, contractAddress, description: "" }}
             />
           </div>
@@ -134,10 +133,20 @@ export default function Form() {
         account.address
       );
 
+      console.log("Response from verification heuristic check: ", response);
+      if (!response.ok) {
+        throw new Error(response.json.message);
+      }
+
+      const {
+        foundContractAddressOnSite,
+        contractCreationAddressMatchesOwner,
+      } = response.json;
+
       setContractAddress(contractAddress);
       setDomainName(domainName);
-      setFoundOnSite(response.foundContractAddressOnSite);
-      setOwnerMatches(response.contractCreationAddressMatchesOwner);
+      setFoundOnSite(foundContractAddressOnSite);
+      setOwnerMatches(contractCreationAddressMatchesOwner);
       setNextStep(true);
     } catch (err) {
       throw new Error(err);
