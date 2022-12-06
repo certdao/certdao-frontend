@@ -8,3 +8,4 @@ export const PAY_AMOUNT_WEI = BigNumber.from(utils.parseEther(PAY_AMOUNT_ETH));
 export const CERTDAO_ABI = certDaoABI.abi;
 export const CONTRACT_CHECKER_URL = process.env.REACT_APP_CONTRACT_CHECKER_URL;
 export const WEB3_MODAL_ID = process.env.REACT_APP_WEB3_MODAL_ID;
+export const DISCOURSE_URL = process.env.REACT_APP_DISCOURSE_URL;

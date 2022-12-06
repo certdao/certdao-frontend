@@ -26,10 +26,23 @@ const config = {
         blockExplorerUrls: [],
         rpcUrls: { default: "http://127.0.0.1:8545" },
       },
+      {
+        id: 5,
+        name: "Goerli",
+        network: "goerli",
+        blockExplorerUrls: [],
+        rpcUrls: {
+          default:
+            "https://eth-goerli.g.alchemy.com/v2/s97pnG-47CpblbIqEmX1Tn7-ywjUuUsX",
+        },
+      },
     ],
     providers: [
       providers.jsonRpcProvider({
         rpc: (chain) => ({ http: "http://127.0.0.1:8545" }),
+      }),
+      providers.alchemyProvider({
+        apiKey: "s97pnG-47CpblbIqEmX1Tn7-ywjUuUsX",
       }),
     ],
   },
@@ -171,7 +184,10 @@ function App() {
                 <a href="#" className="text-xs uppercase tracking-wider">
                   Discord
                 </a>
-                <a href="#" className="text-xs uppercase tracking-wider">
+                <a
+                  href="https://twitter.com/certdao"
+                  className="text-xs uppercase tracking-wider"
+                >
                   Twitter
                 </a>
               </div>

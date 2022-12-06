@@ -3,6 +3,15 @@ import { useEffect } from 'react';
 import React from 'react';
 
 import { CERTDAO_ABI, CERTDAO_ADDRESS } from '../constants';
+import DiscourseLink from './GetDiscourseDiscussion';
+
+const DATA_KEY = {
+  domainName: "",
+  ownerAddress: "",
+  status: "",
+  timestamp: 0,
+  description: "",
+};
 
 export default function RegistrationTableElement({ address }) {
   const getAllContractConfig = {
@@ -29,7 +38,10 @@ export default function RegistrationTableElement({ address }) {
       {data === undefined || data === null ? null : (
         <>
           <tr>
-            <th>{data[0]}</th>
+            <td>{data[0]}</td>
+            <td>
+              <DiscourseLink data={data} address={address} />
+            </td>
             <td>{data[2]}</td>
             <td>{address}</td>
             <td>{data[3].toNumber()}</td>

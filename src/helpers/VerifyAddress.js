@@ -1,11 +1,5 @@
 import { CONTRACT_CHECKER_URL } from '../constants.js';
 
-// // Simple eth address and domainName verification
-// const domainRegex = new RegExp(
-//   "^(((?!-))(xn--)?[a-z0-9-_]{0,61}[a-z0-9]{1,1}.)*(xn--)?([a-z0-9-]{1,61}|[a-z0-9-]{1,30}).[a-z]{2,}$"
-// );
-
-
 const VALIDATE_ROUTE = `${CONTRACT_CHECKER_URL}/validateContract`;
 
 export function validateContractAddress(address) {

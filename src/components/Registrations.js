@@ -1,10 +1,10 @@
 import { useContractRead } from '@web3modal/react';
 import { useAccount } from '@web3modal/react';
-import { useEffect, useState } from "react";
-import React from "react";
+import { useEffect, useState } from 'react';
+import React from 'react';
 
-import { CERTDAO_ABI, CERTDAO_ADDRESS } from "../constants";
-import RegistrationTableElement from "./RegistrationElement";
+import { CERTDAO_ABI, CERTDAO_ADDRESS } from '../constants';
+import RegistrationTableElement from './RegistrationElement';
 
 export default function RegistrationTable({ address }) {
   const [siteError, setError] = useState(null);
@@ -39,6 +39,7 @@ export default function RegistrationTable({ address }) {
         <thead>
           <tr>
             <th>Host Name</th>
+            <th>Discourse Link</th>
             <th>Status</th>
             <th>Contract Address</th>
             <th>Block time registered</th>
