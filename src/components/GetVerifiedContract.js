@@ -5,7 +5,7 @@ import React from 'react';
 import { CERTDAO_ABI, CERTDAO_ADDRESS } from '../constants';
 
 export function GetVerifiedContract() {
-  const domain = window.location.hostname;
+  const domain = window.location.host.replace(/^www\./, "");
 
   const getAllContractConfig = {
     address: CERTDAO_ADDRESS,
