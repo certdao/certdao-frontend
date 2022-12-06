@@ -1,4 +1,4 @@
-import { providers } from '@web3modal/ethereum';
+import { chains, providers } from '@web3modal/ethereum';
 import { Web3Modal } from '@web3modal/react';
 import { useAccount } from '@web3modal/react';
 import React from 'react';
@@ -6,8 +6,7 @@ import React from 'react';
 import RegistrationTable from './components/Registrations';
 import Form from './components/SubmitVerificationForm';
 import Web3 from './components/Web3';
-import { WEB3_MODAL_ID } from './constants';
-
+import { GOERLI_INFURA_API_KEY, WEB3_MODAL_ID } from './constants';
 
 // TODO: Get lock icon: https://icons8.com/icons/set/lock (black, minimal)
 // Web3 config
@@ -19,6 +18,7 @@ const config = {
   ethereum: {
     appName: "certDAO-frontend",
     chains: [
+      chains.goerli,
       {
         id: 1337,
         name: "Hardhat 1337",
@@ -26,23 +26,13 @@ const config = {
         blockExplorerUrls: [],
         rpcUrls: { default: "http://127.0.0.1:8545" },
       },
-      {
-        id: 5,
-        name: "Goerli",
-        network: "goerli",
-        blockExplorerUrls: [],
-        rpcUrls: {
-          default:
-            "https://eth-goerli.g.alchemy.com/v2/s97pnG-47CpblbIqEmX1Tn7-ywjUuUsX",
-        },
-      },
     ],
     providers: [
+      providers.alchemyProvider({
+        apiKey: GOERLI_INFURA_API_KEY,
+      }),
       providers.jsonRpcProvider({
         rpc: (chain) => ({ http: "http://127.0.0.1:8545" }),
-      }),
-      providers.alchemyProvider({
-        apiKey: "s97pnG-47CpblbIqEmX1Tn7-ywjUuUsX",
       }),
     ],
   },
