@@ -1,45 +1,36 @@
 import React from 'react';
+import { useEffect, useState } from 'react';
 
-import { DISCOURSE_URL } from '../constants';
+import { getGovernancePoll } from '../helpers/GovernancePollHelpers';
 
-const EXTERNAL_ID_LIMIT_PER_ENTRY = Math.floor(48 / 3);
+export default function DiscourseLink({ data, address }) {
+  let hostName = data[0];
+  let ownerAddress = data[1];
 
-export default async function DiscourseLink({ data, address }) {
-  let { hostName, ownerAddress, status, blockTime, description } = data;
+  const [discourseLink, setDiscourseLink] = useState("");
 
-  // replace periods in domain
-  let re = /\./gi;
-  hostName = hostName.replace(re, "").substring(0, EXTERNAL_ID_LIMIT_PER_ENTRY);
-
-  const external_id = `${hostName}${ownerAddress.substring(
-    0,
-    EXTERNAL_ID_LIMIT_PER_ENTRY
-  )}${address.substring(0, EXTERNAL_ID_LIMIT_PER_ENTRY)}`;
-
-  const result = await fetch(
-    `${DISCOURSE_URL}/t/external_id/${external_id}.json`,
-    {
-      method: "GET",
+  useEffect(() => {
+    async function callReturnGovernanceInfo() {
+      let result = await getGovernancePoll(hostName, address, ownerAddress);
+      if (result) {
+        console.log("result: ", result);
+        setDiscourseLink(result?.link);
+      } else {
+        setDiscourseLink(`${process.env.DISCOURSE_URL}`);
+      }
     }
-  );
+    callReturnGovernanceInfo();
+  }, []);
 
-  if (result.ok) {
-    const json = await result.json();
-    const link = `${process.env.DISCOURSE_URL}/t/${json?.slug}`;
-    return (
-      <>
+  return (
+    <>
+      {discourseLink ? (
         <td>
-          <a href={link}>
+          <a href={discourseLink}>
             <p>Link</p>
           </a>
         </td>
-      </>
-    );
-  } else {
-    return (
-      <>
-        <td>No link found.</td>
-      </>
-    );
-  }
+      ) : null}
+    </>
+  );
 }
