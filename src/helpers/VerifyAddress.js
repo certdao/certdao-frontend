@@ -16,29 +16,25 @@ export function validateContractAddress(address) {
 }
 
 // Simple domain verification
-export function validateDomainName(domainName) {
-  if (!domainName) {
+export function validateurl(url) {
+  if (!url) {
     return false;
   }
 
-  if (!domainName.startsWith("http://") && !domainName.startsWith("https://")) {
-    domainName = "http://" + domainName;
+  if (!url.startsWith("http://") && !url.startsWith("https://")) {
+    url = "http://" + url;
   }
 
   try {
-    return Boolean(new URL(domainName));
+    return Boolean(new URL(url));
   } catch (e) {
     return false;
   }
 }
 
-export async function checkContractAddress(
-  domainName,
-  contractAddress,
-  ownerAddress
-) {
+export async function checkContractAddress(url, contractAddress, ownerAddress) {
   const requestOptions = {
-    url: domainName,
+    url: url,
     contractAddress: contractAddress,
     owner: ownerAddress,
   };

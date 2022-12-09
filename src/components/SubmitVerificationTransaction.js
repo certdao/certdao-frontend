@@ -8,18 +8,16 @@ import { createGovernancePoll } from '../helpers/GovernancePollHelpers';
 const PAYMENT_OBJECT = { value: PAY_AMOUNT_WEI };
 
 export function SubmitVerificationTransaction({ input }) {
-  let { description, contractAddress, domainName } = input;
+  let { description, contractAddress, url } = input;
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  // Remove http(s):// and www. from domainName
-  domainName = domainName
-    .replace(/^(?:https?:\/\/)?(?:www\.)?/i, "")
-    .split("/")[0];
+  // Remove http(s):// and www. from url
+  url = url.replace(/^(?:https?:\/\/)?(?:www\.)?/i, "").split("/")[0];
 
   const config = {
     address: CERTDAO_ADDRESS,
     abi: CERTDAO_ABI,
-    args: [contractAddress, domainName, description, PAYMENT_OBJECT],
+    args: [contractAddress, url, description, PAYMENT_OBJECT],
     functionName: "submitForValidation",
   };
 
@@ -32,7 +30,7 @@ export function SubmitVerificationTransaction({ input }) {
         console.log("Receipt: ", receipt);
         setIsSubmitting(true);
         await createGovernancePoll(
-          domainName,
+          url,
           contractAddress,
           receipt.from,
           receipt.transactionHash

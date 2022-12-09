@@ -6,7 +6,7 @@ import { CERTDAO_ABI, CERTDAO_ADDRESS } from '../constants';
 import DiscourseLink from './GetDiscourseDiscussion';
 
 const DATA_KEY = {
-  domainName: "",
+  url: "",
   ownerAddress: "",
   status: "",
   timestamp: 0,

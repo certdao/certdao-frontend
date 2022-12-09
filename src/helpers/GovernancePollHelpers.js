@@ -4,13 +4,13 @@ const CREATE_GOVERNANCE_ROUTE = `${CONTRACT_CHECKER_URL}/createGovernancePoll`;
 const GET_GOVERNANCE_ROUTE = `${CONTRACT_CHECKER_URL}/getGovernancePoll`;
 
 export async function createGovernancePoll(
-  domainName,
+  url,
   contractAddress,
   ownerAddress,
   transactionHash
 ) {
   const requestOptions = {
-    url: domainName,
+    url: url,
     contractAddress: contractAddress,
     owner: ownerAddress,
     transactionHash,
@@ -31,13 +31,9 @@ export async function createGovernancePoll(
   }
 }
 
-export async function getGovernancePoll(
-  domainName,
-  contractAddress,
-  ownerAddress
-) {
+export async function getGovernancePoll(url, contractAddress, ownerAddress) {
   const requestOptions = {
-    url: domainName,
+    url: url,
     contractAddress: contractAddress,
     owner: ownerAddress,
   };

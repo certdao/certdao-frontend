@@ -20,7 +20,7 @@
         {
           "indexed": true,
           "internalType": "string",
-          "name": "domainName",
+          "name": "url",
           "type": "string"
         },
         {
@@ -45,7 +45,7 @@
         {
           "indexed": true,
           "internalType": "string",
-          "name": "domainName",
+          "name": "url",
           "type": "string"
         },
         {
@@ -70,7 +70,7 @@
         {
           "indexed": true,
           "internalType": "string",
-          "name": "domainName",
+          "name": "url",
           "type": "string"
         },
         {
@@ -95,7 +95,7 @@
         {
           "indexed": true,
           "internalType": "string",
-          "name": "domainName",
+          "name": "url",
           "type": "string"
         },
         {
@@ -120,7 +120,7 @@
         {
           "indexed": true,
           "internalType": "string",
-          "name": "domainName",
+          "name": "url",
           "type": "string"
         },
         {
@@ -145,7 +145,7 @@
         {
           "indexed": true,
           "internalType": "string",
-          "name": "domainName",
+          "name": "url",
           "type": "string"
         },
         {
@@ -170,7 +170,7 @@
         {
           "indexed": true,
           "internalType": "string",
-          "name": "domainName",
+          "name": "url",
           "type": "string"
         }
       ],
@@ -329,7 +329,7 @@
       "outputs": [
         {
           "internalType": "string",
-          "name": "domainName",
+          "name": "url",
           "type": "string"
         },
         {
@@ -402,7 +402,7 @@
           "type": "address"
         }
       ],
-      "name": "getDomainName",
+      "name": "geturl",
       "outputs": [
         {
           "internalType": "string",
@@ -460,7 +460,7 @@
         },
         {
           "internalType": "string",
-          "name": "domainName",
+          "name": "url",
           "type": "string"
         },
         {
@@ -520,7 +520,7 @@
         },
         {
           "internalType": "string",
-          "name": "domainName",
+          "name": "url",
           "type": "string"
         }
       ],
@@ -597,7 +597,7 @@
         },
         {
           "internalType": "string",
-          "name": "domainName",
+          "name": "url",
           "type": "string"
         },
         {
@@ -682,7 +682,7 @@
         },
         {
           "internalType": "string",
-          "name": "domainName",
+          "name": "url",
           "type": "string"
         }
       ],
