@@ -8,13 +8,16 @@ import { createGovernancePoll } from '../helpers/GovernancePollHelpers';
 const PAYMENT_OBJECT = { value: PAY_AMOUNT_WEI };
 
 export function SubmitVerificationTransaction({ input }) {
-  const { description, contractAddress, domainName } = input;
+  let { description, contractAddress, Url } = input;
+  // sanitize url from the protocol and www
+  Url = Url.replace(/^(?:https?:\/\/)?(?:www\.)?/i, "").split("/")[0];
+
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const config = {
     address: CERTDAO_ADDRESS,
     abi: CERTDAO_ABI,
-    args: [contractAddress, domainName, description, PAYMENT_OBJECT],
+    args: [contractAddress, Url, description, PAYMENT_OBJECT],
     functionName: "submitForValidation",
   };
 
@@ -27,7 +30,7 @@ export function SubmitVerificationTransaction({ input }) {
         console.log("Receipt: ", receipt);
         setIsSubmitting(true);
         await createGovernancePoll(
-          domainName,
+          Url,
           contractAddress,
           receipt.from,
           receipt.transactionHash

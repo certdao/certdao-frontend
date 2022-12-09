@@ -2,12 +2,12 @@ import { useAccount } from '@web3modal/react';
 import { useEffect, useState } from 'react';
 import LoadingIcons from 'react-loading-icons';
 
-import { checkContractAddress, validateContractAddress, validateDomainName } from '../helpers/VerifyAddress';
+import { checkContractAddress, validateContractAddress, validateUrl } from '../helpers/VerifyAddress';
 import { GetVerifiedContract } from './GetVerifiedContract';
 import { SubmitVerificationTransaction } from './SubmitVerificationTransaction';
 
 export default function Form() {
-  const [domainName, setDomainName] = useState("");
+  const [Url, setUrl] = useState("");
   const [contractAddress, setContractAddress] = useState("");
   const [error, setError] = useState(null);
   const [status, setStatus] = useState("typing");
@@ -24,7 +24,7 @@ export default function Form() {
     setError(null);
     setStatus("submitting");
     try {
-      await submitForm(domainName, contractAddress);
+      await submitForm(Url, contractAddress);
       setStatus("success");
     } catch (err) {
       setStatus("typing");
@@ -32,8 +32,8 @@ export default function Form() {
     }
   }
 
-  function handleDomainNameChange(e) {
-    setDomainName(e.target.value);
+  function handleUrlChange(e) {
+    setUrl(e.target.value);
   }
 
   function handleContractAddressChange(e) {
@@ -58,9 +58,9 @@ export default function Form() {
             {/* Add connected wallet address */}
             <form className="form-control w-1/2" onSubmit={handleSubmit}>
               <input
-                type="Domain Name"
-                placeholder="Domain Name"
-                onChange={handleDomainNameChange}
+                type="URL"
+                placeholder="URL"
+                onChange={handleUrlChange}
                 className="input input-bordered input-group-lg"
               />
               <br />
@@ -74,7 +74,7 @@ export default function Form() {
               <button
                 className="btn btn-primary"
                 disabled={
-                  domainName.length === 0 ||
+                  Url.length === 0 ||
                   contractAddress.length === 0 ||
                   !account.isConnected ||
                   status === "submitting"
@@ -94,10 +94,11 @@ export default function Form() {
         <>
           <div className="flex flex-col justify-center flex-grow: 1">
             <p className="py-2 text-l">
-              {contractAddress} lives on {domainName}: {String(foundOnsite)}
+              {contractAddress} lives on {Url}: {String(foundOnsite)}
             </p>
             <p className="py-2 text-l">
-              {account.address} matches contract owner: {String(ownerMatches)}
+              Connected address: {account.address} matches contract owner:{" "}
+              {String(ownerMatches)}
             </p>
             <p>
               If you are okay with the above results, and want to continue with
@@ -108,7 +109,7 @@ export default function Form() {
             <GetVerifiedContract />
             <br />
             <SubmitVerificationTransaction
-              input={{ domainName, contractAddress, description: "" }}
+              input={{ Url, contractAddress, description: "" }}
             />
           </div>
         </>
@@ -116,10 +117,10 @@ export default function Form() {
     </>
   );
 
-  async function submitForm(domainName, contractAddress) {
-    // Validate domain name
-    if (!validateDomainName(domainName)) {
-      throw new Error("Invalid domain name");
+  async function submitForm(Url, contractAddress) {
+    // Validate URL
+    if (!validateUrl(Url)) {
+      throw new Error("Invalid URL");
     }
     // Validate contract address
     if (!validateContractAddress(contractAddress)) {
@@ -128,7 +129,7 @@ export default function Form() {
 
     try {
       const response = await checkContractAddress(
-        domainName,
+        Url,
         contractAddress,
         account.address
       );
@@ -144,7 +145,7 @@ export default function Form() {
       } = response.json;
 
       setContractAddress(contractAddress);
-      setDomainName(domainName);
+      setUrl(Url);
       setFoundOnSite(foundContractAddressOnSite);
       setOwnerMatches(contractCreationAddressMatchesOwner);
       setNextStep(true);
