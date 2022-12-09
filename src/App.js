@@ -6,7 +6,7 @@ import React from 'react';
 import RegistrationTable from './components/Registrations';
 import Form from './components/SubmitVerificationForm';
 import Web3 from './components/Web3';
-import { GOERLI_INFURA_API_KEY, WEB3_MODAL_ID } from './constants';
+import { GOERLI_ALCHEMY_API_KEY, MAINNET_ALCHEMY_API_KEY, WEB3_MODAL_ID } from './constants';
 
 // TODO: Get lock icon: https://icons8.com/icons/set/lock (black, minimal)
 // Web3 config
@@ -29,7 +29,10 @@ const config = {
     ],
     providers: [
       providers.alchemyProvider({
-        apiKey: GOERLI_INFURA_API_KEY,
+        apiKey: GOERLI_ALCHEMY_API_KEY,
+      }),
+      providers.alchemyProvider({
+        apiKey: MAINNET_ALCHEMY_API_KEY,
       }),
       providers.jsonRpcProvider({
         rpc: (chain) => ({ http: "http://127.0.0.1:8545" }),
