@@ -120,8 +120,8 @@ function App() {
                 <p className="py-2 text-xl">
                   <span className="font-bold">CertDAO</span> is a decentralized
                   organization that verifies domain to contract address mappings
-                  for the Ethereum community. Think of CertDAO as like the
-                  "HTTPS" of Web3.
+                  for the Ethereum community. Think of CertDAO as like a
+                  certificate authority for Web3.
                   <br />
                   <br />
                   Contract owners use <span className="font-bold">
@@ -171,7 +171,10 @@ function App() {
                 >
                   Discourse
                 </a>
-                <a href="#" className="text-xs uppercase tracking-wider">
+                <a
+                  href="https://discord.gg/juMRenWj9Q"
+                  className="text-xs uppercase tracking-wider"
+                >
                   Discord
                 </a>
                 <a

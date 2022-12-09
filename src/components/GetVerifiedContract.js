@@ -31,7 +31,7 @@ export function GetVerifiedContract() {
       {data === undefined || data === null ? null : (
         <>
           <p>
-            {domain} is verified to interact with {CERTDAO_ADDRESS}:
+            {domain} is verified to interact with {CERTDAO_ADDRESS}:{" "}
             {String(data)}
           </p>
           {error}

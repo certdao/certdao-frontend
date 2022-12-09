@@ -8,8 +8,13 @@ import { createGovernancePoll } from '../helpers/GovernancePollHelpers';
 const PAYMENT_OBJECT = { value: PAY_AMOUNT_WEI };
 
 export function SubmitVerificationTransaction({ input }) {
-  const { description, contractAddress, domainName } = input;
+  let { description, contractAddress, domainName } = input;
   const [isSubmitting, setIsSubmitting] = useState(false);
+
+  // Remove http(s):// and www. from domainName
+  domainName = domainName
+    .replace(/^(?:https?:\/\/)?(?:www\.)?/i, "")
+    .split("/")[0];
 
   const config = {
     address: CERTDAO_ADDRESS,
