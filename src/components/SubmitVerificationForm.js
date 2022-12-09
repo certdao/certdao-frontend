@@ -97,7 +97,8 @@ export default function Form() {
               {contractAddress} lives on {Url}: {String(foundOnsite)}
             </p>
             <p className="py-2 text-l">
-              {account.address} matches contract owner: {String(ownerMatches)}
+              Connected address: {account.address} matches contract owner:{" "}
+              {String(ownerMatches)}
             </p>
             <p>
               If you are okay with the above results, and want to continue with

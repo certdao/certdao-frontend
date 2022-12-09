@@ -8,7 +8,10 @@ import { createGovernancePoll } from '../helpers/GovernancePollHelpers';
 const PAYMENT_OBJECT = { value: PAY_AMOUNT_WEI };
 
 export function SubmitVerificationTransaction({ input }) {
-  const { description, contractAddress, Url } = input;
+  let { description, contractAddress, Url } = input;
+  // sanitize url from the protocol and www
+  Url = Url.replace(/^(?:https?:\/\/)?(?:www\.)?/i, "").split("/")[0];
+
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const config = {
