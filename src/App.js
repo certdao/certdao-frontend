@@ -17,25 +17,25 @@ const config = {
     appName: "certDAO-frontend",
     chains: [
       chains.mainnet,
-      chains.goerli,
-      {
-        id: 1337,
-        name: "Hardhat 1337",
-        network: "localhost",
-        blockExplorerUrls: [],
-        rpcUrls: { default: "http://127.0.0.1:8545" },
-      },
+      // chains.goerli,
+      // {
+      //   id: 1337,
+      //   name: "Hardhat 1337",
+      //   network: "localhost",
+      //   blockExplorerUrls: [],
+      //   rpcUrls: { default: "http://127.0.0.1:8545" },
+      // },
     ],
     providers: [
       providers.alchemyProvider({
-        apiKey: GOERLI_ALCHEMY_API_KEY,
-      }),
-      providers.alchemyProvider({
         apiKey: MAINNET_ALCHEMY_API_KEY,
       }),
-      providers.jsonRpcProvider({
-        rpc: (chain) => ({ http: "http://127.0.0.1:8545" }),
-      }),
+      // providers.alchemyProvider({
+      //   apiKey: GOERLI_ALCHEMY_API_KEY,
+      // }),
+      // providers.jsonRpcProvider({
+      //   rpc: (chain) => ({ http: "http://127.0.0.1:8545" }),
+      // }),
     ],
   },
 };
