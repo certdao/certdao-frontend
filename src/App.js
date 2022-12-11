@@ -6,11 +6,9 @@ import React from 'react';
 import RegistrationTable from './components/Registrations';
 import Form from './components/SubmitVerificationForm';
 import Web3 from './components/Web3';
-import { GOERLI_INFURA_API_KEY, WEB3_MODAL_ID } from './constants';
+import { GOERLI_ALCHEMY_API_KEY, MAINNET_ALCHEMY_API_KEY, WEB3_MODAL_ID } from './constants';
 
-// TODO: Get lock icon: https://icons8.com/icons/set/lock (black, minimal)
 // Web3 config
-// Change provider to own
 const config = {
   projectId: WEB3_MODAL_ID,
   theme: "light",
@@ -18,6 +16,7 @@ const config = {
   ethereum: {
     appName: "certDAO-frontend",
     chains: [
+      chains.mainnet,
       chains.goerli,
       {
         id: 1337,
@@ -29,7 +28,10 @@ const config = {
     ],
     providers: [
       providers.alchemyProvider({
-        apiKey: GOERLI_INFURA_API_KEY,
+        apiKey: GOERLI_ALCHEMY_API_KEY,
+      }),
+      providers.alchemyProvider({
+        apiKey: MAINNET_ALCHEMY_API_KEY,
       }),
       providers.jsonRpcProvider({
         rpc: (chain) => ({ http: "http://127.0.0.1:8545" }),
@@ -44,14 +46,11 @@ function App() {
 
   async function handleRegistrationClick(e) {
     e.preventDefault();
-    console.log(isConnected, isReady);
-    console.log("clicked handle registration");
     clickedOnRegistration(true);
   }
 
   async function handleHomeClick(e) {
     e.preventDefault();
-    console.log("clicked home registration");
     clickedOnRegistration(false);
   }
 
@@ -64,7 +63,7 @@ function App() {
             <div className="sticky top-0 p-4 bg-gray-100 rounded-xl w-full">
               <ul className="flex sm:flex-col overflow-hidden content-center justify-between">
                 <li className="py-2 hover:bg-indigo-300 rounded">
-                  <a className="truncate" href="#" onClick={handleHomeClick}>
+                  <a className="truncate" href="/" onClick={handleHomeClick}>
                     <img
                       src="//cdn.jsdelivr.net/npm/heroicons@1.0.1/outline/home.svg"
                       className="w-7 sm:mx-2 mx-4 inline"
@@ -91,7 +90,7 @@ function App() {
               <div className="max-w-7xl mx-auto py-8 px-4 sm:px-6 lg:py-12 lg:px-8 lg:flex lg:items-center lg:justify-between">
                 <h2 className="text-3xl font-extrabold tracking-tight text-gray-900 sm:text-4xl">
                   <span className="block text-indigo-600 overflow-ellipsis">
-                    CertDAO
+                    <a href=".">CertDAO</a>
                   </span>
                 </h2>
               </div>
@@ -107,7 +106,7 @@ function App() {
                 className="justify-self-start text-3xl md:text-5xl mb-4 font-extrabold"
                 id="home"
               >
-                CertDAO
+                <a href=".">CertDAO</a>
               </h1>
               <span className="justify-self-end">
                 <Web3 />
@@ -120,8 +119,8 @@ function App() {
                 <p className="py-2 text-xl">
                   <span className="font-bold">CertDAO</span> is a decentralized
                   organization that verifies domain to contract address mappings
-                  for the Ethereum community. Think of CertDAO as like the
-                  "HTTPS" of Web3.
+                  for the Ethereum community. Think of CertDAO as a certificate
+                  authority for Web3.
                   <br />
                   <br />
                   Contract owners use <span className="font-bold">
@@ -144,7 +143,10 @@ function App() {
                   millions of users' trust in the Ethereum space. For more
                   details on how <span className="font-bold">CertDAO</span>{" "}
                   works, check out this
-                  <a className="link link-secondary" href="#">
+                  <a
+                    className="link link-secondary"
+                    href="https://docs.certdao.net"
+                  >
                     {" "}
                     link.
                   </a>
@@ -171,8 +173,23 @@ function App() {
                 >
                   Discourse
                 </a>
-                <a href="#" className="text-xs uppercase tracking-wider">
+                <a
+                  href="https://discord.gg/2xGCMKu3bY"
+                  className="text-xs uppercase tracking-wider"
+                >
                   Discord
+                </a>
+                <a
+                  href="https://docs.certdao.net/"
+                  className="text-xs uppercase tracking-wider"
+                >
+                  Docs
+                </a>
+                <a
+                  href="https://github.com/certdao"
+                  className="text-xs uppercase tracking-wider"
+                >
+                  Github
                 </a>
                 <a
                   href="https://twitter.com/certdao"

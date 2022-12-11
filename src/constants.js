@@ -9,5 +9,7 @@ export const CERTDAO_ABI = certDaoABI.abi;
 export const CONTRACT_CHECKER_URL = process.env.REACT_APP_CONTRACT_CHECKER_URL;
 export const WEB3_MODAL_ID = process.env.REACT_APP_WEB3_MODAL_ID;
 export const DISCOURSE_URL = process.env.REACT_APP_DISCOURSE_URL;
-export const GOERLI_INFURA_API_KEY =
-  process.env.REACT_APP_GOERLI_INFURA_API_KEY;
+export const GOERLI_ALCHEMY_API_KEY =
+  process.env.REACT_APP_GOERLI_ALCHEMY_API_KEY;
+export const MAINNET_ALCHEMY_API_KEY =
+  process.env.REACT_APP_MAINNET_ALCHEMY_API_KEY;

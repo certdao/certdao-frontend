@@ -23,6 +23,10 @@ export default function RegistrationTable({ address }) {
 
   useEffect(() => {
     async function callGetAllRegistrations() {
+      if (!address) {
+        setError("Please connect your wallet to view your registrations.");
+        return;
+      }
       console.log("account address: ", address);
       console.log(getAllContractConfig);
       await refetch();
