@@ -90,7 +90,7 @@ function App() {
               <div className="max-w-7xl mx-auto py-8 px-4 sm:px-6 lg:py-12 lg:px-8 lg:flex lg:items-center lg:justify-between">
                 <h2 className="text-3xl font-extrabold tracking-tight text-gray-900 sm:text-4xl">
                   <span className="block text-indigo-600 overflow-ellipsis">
-                    <a href=".">CertDAO</a>
+                    <a href=".">certDAO</a>
                   </span>
                 </h2>
               </div>
@@ -106,7 +106,7 @@ function App() {
                 className="justify-self-start text-3xl md:text-5xl mb-4 font-extrabold"
                 id="home"
               >
-                <a href=".">CertDAO</a>
+                <a href=".">certDAO</a>
               </h1>
               <span className="justify-self-end">
                 <Web3 />
@@ -117,14 +117,14 @@ function App() {
             ) : (
               <>
                 <p className="py-2 text-xl">
-                  <span className="font-bold">CertDAO</span> is a decentralized
+                  <span className="font-bold">certDAO</span> is a decentralized
                   organization that verifies domain to contract address mappings
-                  for the Ethereum community. Think of CertDAO as a certificate
+                  for the Ethereum community. Think of certDAO as a certificate
                   authority for Web3.
                   <br />
                   <br />
                   Contract owners use <span className="font-bold">
-                    CertDAO
+                    certDAO
                   </span>{" "}
                   to verify the contract addresses and the domains their users
                   will interact with the contract addresses on.
@@ -132,16 +132,16 @@ function App() {
                   <br />
                   Then, anyone, contract, code, wallet or interface can leverage
                   the
-                  <span className="font-bold"> CertDAO</span> registry to verify
+                  <span className="font-bold"> certDAO</span> registry to verify
                   that the contract address is the authorized one for the
                   domain.
                   <br />
                   <br />
                   The hope is that one day, all primary interfaces for smart
                   contracts (wallets) will use
-                  <span className="font-bold"> CertDAO</span>. Scaling the next
+                  <span className="font-bold"> certDAO</span>. Scaling the next
                   millions of users' trust in the Ethereum space. For more
-                  details on how <span className="font-bold">CertDAO</span>{" "}
+                  details on how <span className="font-bold">certDAO</span>{" "}
                   works, check out this
                   <a
                     className="link link-secondary"
@@ -200,7 +200,7 @@ function App() {
               </div>
             </div>
             <div className="text-right text-xs py-2">
-              <a href="">&copy;2022 CertDAO</a>
+              <a href="">&copy;2022 certDAO</a>
             </div>
           </div>
         </footer>
